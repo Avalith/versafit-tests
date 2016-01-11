@@ -157,57 +157,27 @@ def run(*tests):
 	opts.add_argument("--start-fullscreen")
 
 	TestCase.browser_start(Browser(PATH_CRHOME_DRIVER, chrome_options = opts))
-	# HPTestCase.login()
+	# VFTestCase.login()
 	
 	unittest.TextTestRunner(verbosity = 1).run(suite)
 	TestCase.browser_close()
 
-
-class HPTestCase(TestCase):
-	# @classmethod
-	# def login(cls):
-	# 	cls.go('/user/')
-		
-	# 	login = cls.e('#site-content #login-google')
-	# 	login.click()
-	# 	sleep(3)
-		
-	# 	cls.e('#Email').send_keys('gabriela.ananieva@historypin.org')
-	# 	cls.e('#next').click()
-	# 	sleep(.5)
-		
-	# 	cls.e('#Passwd').send_keys('tristania1010')
-	# 	cls.e('#signIn').click()
-	# 	sleep(3)
-		
-	# 	try:
-	# 		cls.e('#submit_approve_access').click()
-	# 		sleep(3)
-	# 	except:
-	# 		pass
-		
-	# 	LOGIN_COOKIES.append(cls.browser.get_cookie('hpsid'))
-		
-	# 	cls.login_cookie_del()
-		
-	# 	cls.browser.execute_script('window.stop();')
-	# 	sleep(1)
-
+class VFTestCase(TestCase):
 
 	@classmethod
 	def new_login(cls):
 		cls.go('/')
 		
-		cls.e('.btn-sign-in').click()
-		cls.e('#sign-mail').click()
-		sleep(1)
+		cls.e('.login a:nth-of-type(2)').click()
+		cls.e('.alternative-login a:nth-of-type(2)').click()
+		sleep(2)
 		
-		cls.e('#email').send_keys('kris.test00@mail.bg')
-		cls.e('#password').send_keys('HistoryPin00')
-		cls.e('.login-submit').click()
+		cls.e('#username_or_email').send_keys('kris.yanachkov@gmail.com')
+		cls.e('#password').send_keys('bind7ultimate')
+		cls.e('.submit').click()
 		
 		# sleep(12)
-		cls.e_wait('.main-header-user')
+		cls.e_wait('.logged-username')
 		
 		LOGIN_COOKIES.append(cls.browser.get_cookie('hpsid'))
 		
@@ -216,7 +186,7 @@ class HPTestCase(TestCase):
 	@classmethod
 	def login_cookie_set(cls):
 		if not LOGIN_COOKIES:
-			HPTestCase.new_login()
+			VFTestCase.new_login()
 		
 		for i in LOGIN_COOKIES:
 			if i: cls.browser.add_cookie(i)
@@ -233,41 +203,41 @@ class HPTestCase(TestCase):
 
 # from base import playground; self = playground()
 def playground():
-	self = HPTestCase
+	self = VFTestCase
 	self.browser_start(Browser(PATH_CRHOME_DRIVER))
 	self.go('/')
 	
 	return self
 
 
-def side_buttons(self):
-	s_buttons = [
-		'.site-toolbar .icon-info', 
-		'.site-toolbar .icon-share', 
-		'.site-toolbar .icon-discussion', 
-		'.site-toolbar .icon-add-collection'
-	]
+# def side_buttons(self):
+# 	s_buttons = [
+# 		'.site-toolbar .icon-info', 
+# 		'.site-toolbar .icon-share', 
+# 		'.site-toolbar .icon-discussion', 
+# 		'.site-toolbar .icon-add-collection'
+# 	]
 
-	for n in range(len(s_buttons)):
-		i = s_buttons[n]
-		# logging.critical(i)
-		self.assertTrue(self.e(i).is_displayed())
-		# self.assertIsInstance(self.e(i), WebElement)
+# 	for n in range(len(s_buttons)):
+# 		i = s_buttons[n]
+# 		# logging.critical(i)
+# 		self.assertTrue(self.e(i).is_displayed())
+# 		# self.assertIsInstance(self.e(i), WebElement)
 		
-def side_buttons_profile(self):
-	sp_buttons = [
-		'.site-toolbar .icon-edit', 
-		'.site-toolbar .icon-share', 
-		'.site-toolbar .icon-discussion', 
-		'.site-toolbar .icon-add-pin', 
-		'.site-toolbar .icon-add-collection', 
-		'.site-toolbar .icon-add-tour'
-	]
+# def side_buttons_profile(self):
+# 	sp_buttons = [
+# 		'.site-toolbar .icon-edit', 
+# 		'.site-toolbar .icon-share', 
+# 		'.site-toolbar .icon-discussion', 
+# 		'.site-toolbar .icon-add-pin', 
+# 		'.site-toolbar .icon-add-collection', 
+# 		'.site-toolbar .icon-add-tour'
+# 	]
 	
-	for n in range(len(sp_buttons)):
-		i = sp_buttons[n]
-		# logging.critical(i)
-		self.assertTrue(self.e(i).is_displayed())
+# 	for n in range(len(sp_buttons)):
+# 		i = sp_buttons[n]
+# 		# logging.critical(i)
+# 		self.assertTrue(self.e(i).is_displayed())
 
 
 
