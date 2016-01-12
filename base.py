@@ -179,7 +179,7 @@ class VFTestCase(TestCase):
 		# sleep(12)
 		cls.e_wait('.logged-username')
 		
-		LOGIN_COOKIES.append(cls.browser.get_cookie('hpsid'))
+		LOGIN_COOKIES.append(cls.browser.get_cookie('fwsess'))
 		
 		cls.login_cookie_del()
 	
