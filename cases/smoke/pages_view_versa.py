@@ -3,7 +3,7 @@ import os, sys
 
 class Pages_View_Versa(VFTestCase):
 	
-	@logged_in
+	@logged_in('user')
 	@url('/')
 	def test_homepage(self):
 		

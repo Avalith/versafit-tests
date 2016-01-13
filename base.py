@@ -47,12 +47,26 @@ def url(url):
 	return wrapper
 
 
-def logged_in(fn):
-	def wrapped(*args, **kwargs):
-		args[0].login_cookie_set()
-		fn(*args, **kwargs)
-		args[0].login_cookie_del()
-	return wrapped
+# def logged_in(fn):
+# 	def wrapped(*args, **kwargs):
+# 		args[0].login_cookie_set()
+# 		fn(*args, **kwargs)
+# 		args[0].login_cookie_del()
+# 	return wrapped
+
+
+def logged_in(typelog):
+	def wrapper(fn):
+		def wrapped(*args, **kwargs):
+			if typelog == 'user':
+				args[0].login_cookie_set()
+			elif typelog == 'club':
+				args[0].login_cookie_set_club()
+			fn(*args, **kwargs)
+			args[0].login_cookie_del()
+		return wrapped
+	return wrapper
+
 
 
 # class Browser(webdriver.Firefox):
@@ -184,9 +198,33 @@ class VFTestCase(TestCase):
 		cls.login_cookie_del()
 	
 	@classmethod
+	def new_login_club(cls):
+		cls.go('/')
+		
+		cls.e('.login a:nth-of-type(2)').click()
+		cls.e_wait('[name="email"]')
+		
+		cls.e('[name="email"]').send_keys('kris.versatest@mail.bg')
+		cls.e('[name="password"]').send_keys('KrisVersa')
+		cls.e('[type="submit"]').click()
+		
+		cls.e_wait('.logged-user  a')
+		
+		LOGIN_COOKIES.append(cls.browser.get_cookie('fwsess'))
+		cls.login_cookie_del()
+	
+	@classmethod
 	def login_cookie_set(cls):
 		if not LOGIN_COOKIES:
 			VFTestCase.new_login()
+		
+		for i in LOGIN_COOKIES:
+			if i: cls.browser.add_cookie(i)
+			
+	@classmethod
+	def login_cookie_set_club(cls):
+		if not LOGIN_COOKIES:
+			VFTestCase.new_login_club()
 		
 		for i in LOGIN_COOKIES:
 			if i: cls.browser.add_cookie(i)
