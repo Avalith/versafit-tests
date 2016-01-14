@@ -3,72 +3,100 @@ import os, sys
 
 class Club_Manage(VFTestCase):
 	
-	# @url('/')
-	# def club_login(self):
-		
-	# 	self.e('.login a:nth-of-type(2)').click()
-	# 	self.e_wait('[name="email"]')
-		
-	# 	self.e('[name="email"]').send_keys('kris.versatest@mail.bg')
-	# 	self.e('[name="password"]').send_keys('KrisVersa')
-	# 	self.e('[type="submit"]').click()
-		
-	# 	self.e_wait('.logged-user  a')
-		
-	# 	LOGIN_COOKIES.append(self.browser.get_cookie('fwsess'))
-	# 	self.login_cookie_del()
-	
 	@logged_in('club')
-	def test_add_event(self):
+	def test_calendar_view(self):
 		
-		# self.e('.sub-nav li:nth-of-type(1) a').click()
-		self.e_wait('.fc-left')
+		self.e('.sub-nav li:nth-of-type(1)').click()
+		self.e_wait('.fc-center h2')
 		
-		self.e('.fc-left button').click()
-		sleep(1)
+		displayed(self, '.site-nav a')
+		displayed(self, '.fc-today-button')
+		displayed(self, '.fc-prev-button')
+		displayed(self, '.fc-next-button')
+		displayed(self, '.fc-month-button')
+		displayed(self, '.fc-agendaWeek-button')
+		displayed(self, '.fc-agendaDay-button')
 		
-		self.e('#title').send_keys("HeavyWeight Beer Cup")
-		self.e('#event_sports [value="12"]').click()
-		self.e('[name="slots"]').send_keys('10')
-		self.e('.filed-wrapper-col #dp-start').click()
-		self.e('.ui-datepicker-buttonpane button').click()
-		self.e('.ui_tpicker_hour').click()
-		self.e('[value="23"]').click()
-		self.e('.ui_tpicker_minute_slider').click()
-		self.e('.ui_tpicker_minute_slider [value="0"]').click()
-		self.e('[data-handler="hide"]').click()
-		# self.e('.filed-wrapper-col #dp-end').click()
-		# self.e('.ui-datepicker-calendar tr:nth-of-type(5) td').click()
-		self.e('#locality').send_keys('stockholm')
-		# self.e('[name="repeat"]').click()
-		# self.e('[value="weekly"]').click()
-		# sleep(1)
-		# self.e('[name="repeat_count"]').click()
-		# self.e('[value="6"]').click()
-		self.e('[value="Create Event"]').click()
-		
-		sleep(3)
-		
-		self.delete_event()
-	
 	@logged_in('club')
-	def delete_event(self):
+	def test_employees_view(self):
 		
-		self.e_wait('.fc-view-container')
+		self.e('.sub-nav li:nth-of-type(2)').click()
+		self.e_wait('.sub-nav-title a')
 		
-		self.e('[data-full="11:00 PM - 12:00 AM"]').click()
+		self.e('[type="search"]').send_keys('Asen Lazarov')
 		sleep(1)
 		
-		self.e('.button.remove').click()
-		sleep(1)
+		self.e('.select2-results li').click()
 		
-		self.accept_alert()
-		sleep(2)
+		displayed(self, '.list-item img')
+		self.assertEqual('ASEN LAZAROV', self.e('.list-item h5').text)
+		displayed(self, '[name="role"]')
+		displayed(self, '.select-style [name="sport_id"]')
+		instance(self, '[value="coach"]')
+		instance(self, '[value="supervisor"]')
+		instance(self, '[value="12"]')
+		instance(self, '[value="21"]')
+		displayed(self, '[type="submit"]')
 		
-		self.go('/')
-		self.e_wait('.upcoming-event tr')
+	@logged_in('club')
+	def test_applications_view(self):
 		
-		self.assertFalse('HeavyWeight Beer Cup' == self.e('.upcoming-event:first-of-type tr:nth-child(2) td span').text)
+		self.e('.sub-nav li:nth-of-type(3)').click()
+		self.e_wait('.accepted-status')
+		
+		self.e('.icon-plus').click()
+		self.e_wait('#submit-button')
+		
+		displayed(self, '.select-style [name="sport_id"]')
+		instance(self, '[name="sport_id"] [value="12"]')
+		instance(self, '[name="sport_id"] [value="21"]')
+		instance(self, '[name="sport_id"] [value="20"]')
+		instance(self, '[name="sport_id"] [value="31"]')
+		instance(self, '[name="sport_id"] [value="23"]')
+		instance(self, '[name="sport_id"] [value="24"]')
+		instance(self, '[name="sport_id"] [value="34"]')
+		instance(self, '[name="sport_id"] [value="28"]')
+		instance(self, '[name="sport_id"] [value="25"]')
+		instance(self, '[name="sport_id"] [value="11"]')
+		instance(self, '[name="sport_id"] [value="16"]')
+		instance(self, '[name="sport_id"] [value="13"]')
+		instance(self, '[name="sport_id"] [value="29"]')
+		instance(self, '[name="sport_id"] [value="18"]')
+		displayed(self, '[name="price"]')
+		instance(self, '[name="price"] [value="1"]')
+		instance(self, '[name="price"] [value="20"]')
+		instance(self, '[name="price"] [value="50"]')
+		instance(self, '[name="price"] [value="100"]')
+		displayed(self, '#locality')
+		displayed(self, '#map')
+		displayed(self, '[name="requirements"]')
+		displayed(self, '[name="description"]')
+		displayed(self, '.button.bg-blue')
+		self.e('[type="file"]').send_keys('/Users/kris/Downloads/index.jpg')
+		displayed(self, '.MultiFile-label img')
+		displayed(self, '.MultiFile-remove')
+		
+	@logged_in('club')
+	def test_history_view(self):
+		
+		self.e('.sub-nav li:nth-of-type(4)').click()
+		self.e_wait('.upcoming-event')
+		
+		displayed(self, '#filter_sports')
+		instance(self, '#filter_sports [value=""]')
+		instance(self, '#filter_sports [value="12"]')
+		instance(self, '#filter_sports [value="21"]')
+		displayed(self, '#filter_days')
+		instance(self, '#filter_days [value="0"]')
+		instance(self, '#filter_days [value="1"]')
+		instance(self, '#filter_days [value="2"]')
+		instance(self, '#filter_days [value="3"]')
+		instance(self, '#filter_days [value="4"]')
+		instance(self, '#filter_days [value="5"]')
+		instance(self, '#filter_days [value="6"]')
+		displayed(self, '.table tr td:nth-of-type(1)')
+		displayed(self, '.table tr td:nth-of-type(2)')
+		displayed(self, '.table tr td:nth-of-type(3)')
 		
 		
 		

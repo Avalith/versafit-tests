@@ -21,7 +21,7 @@ class Pages_View_Versa(VFTestCase):
 		self.assertEqual('http://versafit.test.avalith.bg/en/faq/', self.e('.site-nav li:nth-of-type(5) a').get_attribute('href'))
 		self.assertEqual('http://versafit.test.avalith.bg/en/aboutus/', self.e('.site-nav li:nth-of-type(6) a').get_attribute('href'))
 		displayed(self, '.polyglot-language-switcher')
-		displayed(self, '.at4-share-outer #at4-share')
+		# displayed(self, '.at4-share-outer #at4-share') WAIT FOR REPAIR SOCIAL PANEL
 		# displayed(self, '.events-table tr')
 		# displayed(self, '.attending-table tr')
 		displayed(self, '.news-item h2')
@@ -53,6 +53,48 @@ class Pages_View_Versa(VFTestCase):
 		self.assertEqual('http://versafit.test.avalith.bg/en/sports/volleyball/', self.e('.page a:nth-of-type(13)').get_attribute('href'))
 		self.assertEqual('http://versafit.test.avalith.bg/en/sports/wrestling/', self.e('.page a:nth-of-type(14)').get_attribute('href'))
 		displayed(self, '.links a')
+		
+	@url('/')
+	def test_search_club(self):
+		
+		self.e('.search-menu a').click()
+		self.e('.select2-selection').click()
+		self.e('.select2-search__field').send_keys('kristestclub')
+		sleep(1)
+		
+		self.e('.select2-results__option').click()
+		sleep(1)
+		
+		self.assertEqual('KrisTestClub', self.e('.club-title').text)
+	
+	@logged_in('user')
+	@url('/')
+	def test_search_user(self):
+		
+		self.e('.search-menu a').click()
+		self.e('.select2-selection').click()
+		self.e('.select2-search__field').send_keys('Nikolay Furnadzhiev')
+		sleep(1)
+		
+		self.e('.select2-results__option').click()
+		sleep(1)
+		
+		self.assertEqual('Nikolay Furnadzhiev', self.e('.user-name').text)
+		displayed(self, '.user-image-wrapper img')
+		displayed(self, '[value="Invite"]')
+		displayed(self, '.user-info p a')
+		displayed(self, '.user-sports a')
+		displayed(self, '.Xtd-inner')
+		displayed(self, '.friends-list h5')
+		displayed(self, '.friends-list a')
+		displayed(self, '.button-centered-wrapper a')
+		self.e('.user-actions a').click()
+		sleep(2)
+		
+		displayed(self, '[name="text"]')
+		displayed(self, '[value="Send"]')
+		displayed(self, '.send-message h5')
+		
 		
 		
 		
