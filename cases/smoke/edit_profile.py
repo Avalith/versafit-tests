@@ -1,7 +1,7 @@
 from base import *
 import os, sys
 
-class Edit_Profile(VFTestCase):
+class Edit_Profile(TestCase):
 	
 	@logged_in
 	@url('/en/profile/kris-test/edit/')

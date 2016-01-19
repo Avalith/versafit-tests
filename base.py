@@ -55,18 +55,71 @@ def url(url):
 # 	return wrapped
 
 
-def logged_in(typelog):
+
+LOGIN_COOKIES = {}
+
+def logged_in(login_type):
 	def wrapper(fn):
 		def wrapped(*args, **kwargs):
-			if typelog == 'user':
-				args[0].login_cookie_set()
-			elif typelog == 'club':
-				args[0].login_cookie_set_club()
+			opts = LOGIN_DETAILS[login_type]
+			
+			cls = args[0]
+			cls.login_cookie_set(login_type, opts)
+			
 			fn(*args, **kwargs)
-			args[0].login_cookie_del()
+			
+			cls.login_cookie_del()
 		return wrapped
 	return wrapper
 
+class Logins:
+	# def logout(self):
+	# 	self.go(URL_BASE + '/user/logout/')
+	# 	self.pageload_wait()
+	
+	@classmethod
+	def login_cookie_set(cls, login_type, opts):
+		cookie = LOGIN_COOKIES.get(login_type)
+		
+		if cookie:
+			cls.login_cookie_del()
+			cls.browser.add_cookie(cookie)
+		else:
+			getattr(cls, 'login_method_' + opts['type'])(opts)
+			
+			LOGIN_COOKIES[login_type] = cls.browser.get_cookie('fwsess')
+			
+			sleep(.5)
+	
+	@classmethod
+	def login_cookie_del(cls):
+		cls.browser.delete_cookie('fwsess')
+	
+	@classmethod
+	def login_method_standard(cls, opts):
+		cls.go('/en/login/')
+		
+		cls.e('input[name=email]').send_keys(opts['user'])
+		cls.e('input[name=password]').send_keys(opts['pass'])
+		
+		cls.e('input[type=submit]').click()
+	
+	# fb
+	
+	@classmethod
+	def login_method_twitter(cls, opts):
+		cls.e('.login a:nth-of-type(2)').click()
+		cls.e('.alternative-login a:nth-of-type(2)').click()
+		sleep(2)
+		
+		cls.e('#username_or_email')
+		cls.e('#password').send_keys(opts['pass'])
+		cls.e('.submit').click()
+		
+		# sleep(12)
+		cls.e_wait('.logged-username')
+	
+	# gp
 
 
 # class Browser(webdriver.Firefox):
@@ -116,10 +169,40 @@ class Browser(webdriver.Chrome):
 	def accept_alert(self):
 		alert = self.switch_to_alert()
 		alert.accept()
-		
 
 
-class TestCase(unittest.TestCase):
+
+def run(*tests):
+	import cases
+	
+	suite = unittest.TestSuite()
+	
+	if tests:
+		for i in tests:
+			i = i.split('.')
+			
+			test_case = getattr(cases, i[0])
+			if len(i) > 1:
+				suite.addTest(test_case(i[1]))
+			else:
+				suite.addTests(unittest.TestLoader().loadTestsFromTestCase(test_case))
+	else:
+		suite.addTests(unittest.TestLoader().loadTestsFromModule(cases))
+	
+	# TestCase.browser_start(Browser())
+
+	from selenium.webdriver.chrome.options import Options
+	opts = Options()
+	# opts.add_argument("--start-fullscreen")
+	opts.add_argument("--maximize")
+
+	TestCase.browser_start(Browser(PATH_CRHOME_DRIVER, chrome_options = opts))
+	
+	unittest.TextTestRunner(verbosity = 1).run(suite)
+	TestCase.browser_close()
+
+
+class TestCase(unittest.TestCase, Logins):
 	@classmethod
 	def browser_start(cls, browser):
 		cls.browser = browser
@@ -144,104 +227,9 @@ class TestCase(unittest.TestCase):
 		self.assertIn(title, self.browser.title)
 
 
-LOGIN_COOKIES = []
-
-
-def run(*tests):
-	import cases
-	
-	suite = unittest.TestSuite()
-	
-	if tests:
-		for i in tests:
-			i = i.split('.')
-			
-			test_case = getattr(cases, i[0])
-			if len(i) > 1:
-				suite.addTest(test_case(i[1]))
-			else:
-				suite.addTests(unittest.TestLoader().loadTestsFromTestCase(test_case))
-	else:
-		suite.addTests(unittest.TestLoader().loadTestsFromModule(cases))
-	
-	# TestCase.browser_start(Browser())
-
-	from selenium.webdriver.chrome.options import Options
-	opts = Options()
-	opts.add_argument("--start-fullscreen")
-
-	TestCase.browser_start(Browser(PATH_CRHOME_DRIVER, chrome_options = opts))
-	# VFTestCase.login()
-	
-	unittest.TextTestRunner(verbosity = 1).run(suite)
-	TestCase.browser_close()
-
-class VFTestCase(TestCase):
-
-	@classmethod
-	def new_login(cls):
-		cls.go('/')
-		
-		cls.e('.login a:nth-of-type(2)').click()
-		cls.e('.alternative-login a:nth-of-type(2)').click()
-		sleep(2)
-		
-		cls.e('#username_or_email').send_keys('kris.yanachkov@gmail.com')
-		cls.e('#password').send_keys('bind7ultimate')
-		cls.e('.submit').click()
-		
-		# sleep(12)
-		cls.e_wait('.logged-username')
-		
-		LOGIN_COOKIES.append(cls.browser.get_cookie('fwsess'))
-		
-		cls.login_cookie_del()
-	
-	@classmethod
-	def new_login_club(cls):
-		cls.go('/')
-		
-		cls.e('.login a:nth-of-type(2)').click()
-		cls.e_wait('[name="email"]')
-		
-		cls.e('[name="email"]').send_keys('kris.versatest@mail.bg')
-		cls.e('[name="password"]').send_keys('KrisVersa')
-		cls.e('[type="submit"]').click()
-		
-		cls.e_wait('.logged-user  a')
-		
-		LOGIN_COOKIES.append(cls.browser.get_cookie('fwsess'))
-		cls.login_cookie_del()
-	
-	@classmethod
-	def login_cookie_set(cls):
-		if not LOGIN_COOKIES:
-			VFTestCase.new_login()
-		
-		for i in LOGIN_COOKIES:
-			if i: cls.browser.add_cookie(i)
-			
-	@classmethod
-	def login_cookie_set_club(cls):
-		if not LOGIN_COOKIES:
-			VFTestCase.new_login_club()
-		
-		for i in LOGIN_COOKIES:
-			if i: cls.browser.add_cookie(i)
-	
-	@classmethod
-	def login_cookie_del(cls):
-		for i in LOGIN_COOKIES:
-			if i: cls.browser.delete_cookie(i['name'])
-	
-	# def logout(self):
-	# 	self.go(URL_BASE + '/user/logout/')
-	# 	self.pageload_wait()
-
-
 # from base import playground; self = playground()
 def playground():
-	self = VFTestCase
+	self = TestCase
 	self.browser_start(Browser(PATH_CRHOME_DRIVER))
 	self.go('/')
 	

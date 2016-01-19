@@ -1,7 +1,7 @@
 from base import *
 import os, sys
 
-class Pages_View_Versa(VFTestCase):
+class Pages_View_Versa(TestCase):
 	
 	@logged_in('user')
 	@url('/')
@@ -33,6 +33,8 @@ class Pages_View_Versa(VFTestCase):
 		# TO DO site footer social-link
 		# self.e('.search-menu').click()
 		
+		sleep(1)
+	
 	@url('/en/sports')
 	def test_sports(self):
 		
@@ -70,11 +72,11 @@ class Pages_View_Versa(VFTestCase):
 	@logged_in('user')
 	@url('/')
 	def test_search_user(self):
+		sleep(1)
 		
 		self.e('.search-menu a').click()
 		self.e('.select2-selection').click()
 		self.e('.select2-search__field').send_keys('Nikolay Furnadzhiev')
-		sleep(1)
 		
 		self.e('.select2-results__option').click()
 		sleep(1)

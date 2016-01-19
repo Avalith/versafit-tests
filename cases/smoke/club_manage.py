@@ -1,7 +1,7 @@
 from base import *
 import os, sys
 
-class Club_Manage(VFTestCase):
+class Club_Manage(TestCase):
 	
 	@logged_in('club')
 	def test_calendar_view(self):
