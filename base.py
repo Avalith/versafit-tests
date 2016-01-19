@@ -101,22 +101,24 @@ class Logins:
 		
 		cls.e('input[name=email]').send_keys(opts['user'])
 		cls.e('input[name=password]').send_keys(opts['pass'])
-		
 		cls.e('input[type=submit]').click()
-	
+		
+		cls.e_wait('.logged-username')
+		
 	# fb
 	
 	@classmethod
 	def login_method_twitter(cls, opts):
+		cls.go('/')
+		
 		cls.e('.login a:nth-of-type(2)').click()
 		cls.e('.alternative-login a:nth-of-type(2)').click()
 		sleep(2)
 		
-		cls.e('#username_or_email')
+		cls.e('#username_or_email').send_keys(opts['user'])
 		cls.e('#password').send_keys(opts['pass'])
 		cls.e('.submit').click()
 		
-		# sleep(12)
 		cls.e_wait('.logged-username')
 	
 	# gp
@@ -193,8 +195,8 @@ def run(*tests):
 
 	from selenium.webdriver.chrome.options import Options
 	opts = Options()
-	# opts.add_argument("--start-fullscreen")
-	opts.add_argument("--maximize")
+	opts.add_argument("--start-fullscreen")
+	# opts.add_argument("--maximize")
 
 	TestCase.browser_start(Browser(PATH_CRHOME_DRIVER, chrome_options = opts))
 	
@@ -228,12 +230,12 @@ class TestCase(unittest.TestCase, Logins):
 
 
 # from base import playground; self = playground()
-def playground():
-	self = TestCase
-	self.browser_start(Browser(PATH_CRHOME_DRIVER))
-	self.go('/')
+# def playground():
+# 	self = TestCase
+# 	self.browser_start(Browser(PATH_CRHOME_DRIVER))
+# 	self.go('/')
 	
-	return self
+# 	return self
 
 
 # def side_buttons(self):

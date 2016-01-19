@@ -4,7 +4,7 @@ import logging
 
 class Pages_View_Versa(TestCase):
 	
-	@logged_in('user')
+	@logged_in('twitter')
 	@url('/')
 	def test_homepage(self):
 		
@@ -70,17 +70,18 @@ class Pages_View_Versa(TestCase):
 		
 		self.assertEqual('KrisTestClub', self.e('.club-title').text)
 	
+	@logged_in('twitter')
 	@url('/')
-	@logged_in('user')
 	def test_search_user(self):
 		sleep(1)
 		
 		self.e('.search-menu a').click()
 		self.e('.select2-selection').click()
 		self.e('.select2-search__field').send_keys('Nikolay Furnadzhiev')
-		
-		self.e('.select2-results__option').click()
 		sleep(1)
+		
+		self.e('.select2-results__option img').click()
+		self.e_wait('.user-name')
 		
 		self.assertEqual('Nikolay Furnadzhiev', self.e('.user-name').text)
 		displayed(self, '.user-image-wrapper img')

@@ -19,9 +19,10 @@ class Add_Event(TestCase):
 	# 	self.login_cookie_del()
 	
 	@logged_in('club')
+	@url('/en/club/manage/')
 	def test_add_event(self):
 		
-		# self.e('.sub-nav li:nth-of-type(1) a').click()
+		self.e('.sub-nav li:nth-of-type(1) a').click()
 		self.e_wait('.fc-left')
 		
 		self.e('.fc-left button').click()

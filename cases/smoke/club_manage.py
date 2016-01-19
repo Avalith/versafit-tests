@@ -3,7 +3,8 @@ import os, sys
 
 class Club_Manage(TestCase):
 	
-	@logged_in('club')
+	@logged_in('club') 
+	@url('/en/club/manage/')
 	def test_calendar_view(self):
 		
 		self.e('.sub-nav li:nth-of-type(1)').click()
@@ -18,6 +19,7 @@ class Club_Manage(TestCase):
 		displayed(self, '.fc-agendaDay-button')
 		
 	@logged_in('club')
+	@url('/en/club/manage/')
 	def test_employees_view(self):
 		
 		self.e('.sub-nav li:nth-of-type(2)').click()
@@ -39,6 +41,7 @@ class Club_Manage(TestCase):
 		displayed(self, '[type="submit"]')
 		
 	@logged_in('club')
+	@url('/en/club/manage/')
 	def test_applications_view(self):
 		
 		self.e('.sub-nav li:nth-of-type(3)').click()
@@ -77,6 +80,7 @@ class Club_Manage(TestCase):
 		displayed(self, '.MultiFile-remove')
 		
 	@logged_in('club')
+	@url('/en/club/manage/')
 	def test_history_view(self):
 		
 		self.e('.sub-nav li:nth-of-type(4)').click()

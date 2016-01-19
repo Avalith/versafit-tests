@@ -4,6 +4,7 @@ import os, sys
 class Add_News(TestCase):
 	
 	@logged_in('club')
+	@url('/en/club/manage/')
 	def test_add_news(self):
 		
 		self.e_wait('.sub-nav li:nth-of-type(5)')

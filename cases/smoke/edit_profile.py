@@ -3,7 +3,7 @@ import os, sys
 
 class Edit_Profile(TestCase):
 	
-	@logged_in
+	@logged_in('twitter')
 	@url('/en/profile/kris-test/edit/')
 	def test_edit_profile(self):
 		
@@ -40,7 +40,7 @@ class Edit_Profile(TestCase):
 		
 		self.edit_clear()
 		
-	@logged_in
+	@logged_in('twitter')
 	@url('/en/')
 	def edit_clear(self):
 		
