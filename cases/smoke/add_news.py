@@ -1,7 +1,7 @@
 from base import *
 import os, sys
 
-class Add_News(VFTestCase):
+class Add_News(TestCase):
 	
 	@logged_in('club')
 	def test_add_news(self):

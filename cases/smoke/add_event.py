@@ -1,7 +1,7 @@
 from base import *
 import os, sys
 
-class Add_Event(VFTestCase):
+class Add_Event(TestCase):
 	
 	# @url('/')
 	# def club_login(self):
