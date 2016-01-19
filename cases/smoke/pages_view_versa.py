@@ -1,5 +1,6 @@
 from base import *
 import os, sys
+import logging
 
 class Pages_View_Versa(VFTestCase):
 	
@@ -67,8 +68,8 @@ class Pages_View_Versa(VFTestCase):
 		
 		self.assertEqual('KrisTestClub', self.e('.club-title').text)
 	
-	@logged_in('user')
 	@url('/')
+	@logged_in('user')
 	def test_search_user(self):
 		
 		self.e('.search-menu a').click()

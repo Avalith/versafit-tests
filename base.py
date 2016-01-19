@@ -189,13 +189,12 @@ class VFTestCase(TestCase):
 		cls.e('#username_or_email').send_keys('kris.yanachkov@gmail.com')
 		cls.e('#password').send_keys('bind7ultimate')
 		cls.e('.submit').click()
-		
-		# sleep(12)
 		cls.e_wait('.logged-username')
 		
 		LOGIN_COOKIES.append(cls.browser.get_cookie('fwsess'))
-		
 		cls.login_cookie_del()
+		# cls.browser.execute_script('window.stop();')
+		# sleep(1)
 	
 	@classmethod
 	def new_login_club(cls):
@@ -207,7 +206,6 @@ class VFTestCase(TestCase):
 		cls.e('[name="email"]').send_keys('kris.versatest@mail.bg')
 		cls.e('[name="password"]').send_keys('KrisVersa')
 		cls.e('[type="submit"]').click()
-		
 		cls.e_wait('.logged-user  a')
 		
 		LOGIN_COOKIES.append(cls.browser.get_cookie('fwsess'))
@@ -220,9 +218,10 @@ class VFTestCase(TestCase):
 		
 		for i in LOGIN_COOKIES:
 			if i: cls.browser.add_cookie(i)
-			
+	
 	@classmethod
 	def login_cookie_set_club(cls):
+		logging.critical(LOGIN_COOKIES)
 		if not LOGIN_COOKIES:
 			VFTestCase.new_login_club()
 		
@@ -233,19 +232,20 @@ class VFTestCase(TestCase):
 	def login_cookie_del(cls):
 		for i in LOGIN_COOKIES:
 			if i: cls.browser.delete_cookie(i['name'])
-	
+
+
 	# def logout(self):
 	# 	self.go(URL_BASE + '/user/logout/')
 	# 	self.pageload_wait()
 
 
 # from base import playground; self = playground()
-def playground():
-	self = VFTestCase
-	self.browser_start(Browser(PATH_CRHOME_DRIVER))
-	self.go('/')
+# def playground():
+# 	self = VFTestCase
+# 	self.browser_start(Browser(PATH_CRHOME_DRIVER))
+# 	self.go('/')
 	
-	return self
+# 	return self
 
 
 # def side_buttons(self):
