@@ -2,13 +2,13 @@ from base import *
 import os, sys
 import logging
 
-class Pages_View_Versa(TestCase):
+class Pages_View(TestCase):
 	
 	@logged_in('twitter')
 	@url('/')
 	def test_homepage(self):
 		
-		self.e_wait('.what-is-versafit')
+		# self.e_wait('.what-is-versafit')
 		
 		self.assertEqual('http://versafit.test.avalith.bg/', self.e('.header-logo a').get_attribute('href'))
 		displayed(self, '.icon-whistle')
@@ -39,7 +39,7 @@ class Pages_View_Versa(TestCase):
 	@url('/en/sports')
 	def test_sports(self):
 		
-		self.e_wait('.site-nav a')
+		# self.e_wait('.site-nav a')
 		
 		self.assertEqual('http://versafit.test.avalith.bg/en/sports/boxing/', self.e('.page a:nth-of-type(1)').get_attribute('href'))
 		self.assertEqual('http://versafit.test.avalith.bg/en/sports/calisthenics/', self.e('.page a:nth-of-type(2)').get_attribute('href'))
@@ -73,7 +73,7 @@ class Pages_View_Versa(TestCase):
 	@logged_in('twitter')
 	@url('/')
 	def test_search_user(self):
-		sleep(1)
+		# sleep(1)
 		
 		self.e('.search-menu a').click()
 		self.e('.select2-selection').click()
@@ -98,6 +98,37 @@ class Pages_View_Versa(TestCase):
 		displayed(self, '[name="text"]')
 		displayed(self, '[value="Send"]')
 		displayed(self, '.send-message h5')
+		
+	# @logged_in('wronguser')
+	# def test_wrong_user(self): #TO DO
+	
+	@url('/en/register')
+	def test_reg_acount(self):
+		
+		self.e('.login a').click()
+		self.e_wait('#name')
+		
+		displayed(self, '#username')
+		displayed(self, '#email')
+		displayed(self, '#country')
+		instance(self, '[value="AF"]')
+		instance(self, '[value="ZW"]')
+		self.e('[value="BG"]').click()
+		displayed(self, '#city')
+		displayed(self, '#locality')
+		displayed(self, '#years')
+		instance(self, '[value="2016"]')
+		instance(self, '[value="1901"]')
+		displayed(self, '#months')
+		instance(self, '#months [value="01"]')
+		instance(self, '#months [value="12"]')
+		displayed(self, '#days')
+		instance(self, '#days [value="01"]')
+		instance(self, '#days [value="31"]')
+		displayed(self, '#personal_number')
+		displayed(self, '#password')
+		displayed(self, '#password-confirmation')
+		
 		
 		
 		

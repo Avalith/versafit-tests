@@ -10,13 +10,13 @@ class Edit_Profile(TestCase):
 		self.e_wait('.profile-img-wrapper img')
 		
 		self.assertEqual('Kris Test', self.e('.logged-username').text)
-		self.e('.sport-wrapper-inner a').click()
+		self.e('.sport-wrapper-inner a').click()									# remove my sport 1
 		sleep(1)
 		
-		self.e('.sport-wrapper-inner a').click()
+		self.e('.sport-wrapper-inner a').click()									# remove my sport 2
 		sleep(1)
 		
-		self.e('.icon-close').click()
+		self.e('.icon-close').click()												# remove my subscriptions
 		sleep(1)
 		
 		self.e('[name="data[name]"]').send_keys(' Changes')
@@ -34,7 +34,7 @@ class Edit_Profile(TestCase):
 		displayed(self, '[name="social_media[google_plus][url]"]')
 		displayed(self, '[name="social_media[instagram][url]"]')
 		displayed(self, '.links a:nth-of-type(3)')
-		self.e('[value="Save"]').click()
+		self.e('[value="Save"]').submit()
 		
 		sleep(3)
 		
@@ -65,12 +65,12 @@ class Edit_Profile(TestCase):
 		self.e('#months [value="12"]').click()
 		self.e('#days [value="31"]').click()
 		self.e('.select2:nth-of-type(1) .select2-search__field').click()
-		self.e('#select2-user_sport-results li:nth-of-type(1)').click()
+		self.e('#select2-user_sport-results li:nth-of-type(1)').click()					# add boxing
 		self.e('.select2:nth-of-type(1) .select2-search__field').click()
-		self.e('#select2-user_sport-results li:nth-of-type(2)').click()
+		self.e('#select2-user_sport-results li:nth-of-type(2)').click()					# add calisthenics
 		self.e('.select2:nth-of-type(2) .select2-search__field').click()
-		self.e('#select2-club_subscriptions-results li:nth-of-type(1)').click()
-		self.e('[value="Save"]').click()
+		self.e('#select2-club_subscriptions-results li:nth-of-type(1)').click()			# add club testing
+		self.e('[value="Save"]').submit()
 		
 		sleep(3)
 		

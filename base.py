@@ -32,8 +32,10 @@ WebElement.parent_node 	= lambda self: self.find_element_by_xpath('./parent::nod
 def displayed(self, selector):
 	self.assertTrue(self.e(selector).is_displayed())
 
+
 def instance(self, selector):
 	self.assertIsInstance(self.e(selector), WebElement)
+
 
 def url(url):
 	def wrapper(fn):
@@ -55,8 +57,8 @@ def url(url):
 # 	return wrapped
 
 
-
 LOGIN_COOKIES = {}
+
 
 def logged_in(login_type):
 	def wrapper(fn):
@@ -72,10 +74,12 @@ def logged_in(login_type):
 		return wrapped
 	return wrapper
 
+
 class Logins:
-	# def logout(self):
-	# 	self.go(URL_BASE + '/user/logout/')
-	# 	self.pageload_wait()
+	
+	def logout(self):
+		self.go(URL_BASE + '/en/logout/')
+		self.pageload_wait()
 	
 	@classmethod
 	def login_cookie_set(cls, login_type, opts):
@@ -126,6 +130,7 @@ class Logins:
 
 # class Browser(webdriver.Firefox):
 class Browser(webdriver.Chrome):
+	
 	def go(self, url):
 		self.get(('' if url.startswith('http') else URL_BASE) + url)
 		self.pageload_wait()
@@ -147,14 +152,13 @@ class Browser(webdriver.Chrome):
 			raise NoSuchElementException('The element could not be found')
 	
 	def pageload_wait(self, timeout = 30):
-		sleep(1)
-		# TODO Fix this to work with something else than dummy sleep
-		# self.e_wait('body')
-		# try:
-		# 	w = WebDriverWait(self, timeout)
-		# 	return w.until(lambda driver: driver.execute_script("return document.readyState;") == "complete")
-		# except:
-		# 	raise Exception('Page could not load')
+		# sleep(1)
+		self.e_wait('body')
+		try:
+			w = WebDriverWait(self, timeout)
+			return w.until(lambda driver: driver.execute_script("return document.readyState;") == "complete")
+		except:
+			raise Exception('Page could not load')
 	
 	def hover(self, elem):
 		ActionChains(self).move_to_element(elem).perform()
@@ -171,7 +175,6 @@ class Browser(webdriver.Chrome):
 	def accept_alert(self):
 		alert = self.switch_to_alert()
 		alert.accept()
-
 
 
 def run(*tests):
@@ -216,7 +219,7 @@ class TestCase(unittest.TestCase, Logins):
 		cls.e				= cls.browser.e
 		cls.e_wait			= cls.browser.e_wait
 		cls.exists			= cls.browser.exists
-		# cls.pageload_wait	= cls.browser.pageload_wait
+		cls.pageload_wait	= cls.browser.pageload_wait
 		cls.hover			= cls.browser.hover
 		cls.double_click	= cls.browser.double_click
 		cls.accept_alert	= cls.browser.accept_alert
@@ -251,7 +254,8 @@ class TestCase(unittest.TestCase, Logins):
 # 		# logging.critical(i)
 # 		self.assertTrue(self.e(i).is_displayed())
 # 		# self.assertIsInstance(self.e(i), WebElement)
-		
+
+
 # def side_buttons_profile(self):
 # 	sp_buttons = [
 # 		'.site-toolbar .icon-edit', 

@@ -26,4 +26,5 @@ LOGIN_DETAILS = {
 	'facebook'		: { 'type': 'facebook'		, 'user': ''							, 'pass': '', },
 	'twitter'		: { 'type': 'twitter'		, 'user': 'kris.yanachkov@gmail.com'	, 'pass': 'bind7ultimate', },
 	'googleplus'	: { 'type': 'googleplus'	, 'user': ''							, 'pass': '', },
+	'wronguser'		: { 'type': 'standart'		, 'user': 'wronguser'					, 'pass': 'highsecurity', },
 }
