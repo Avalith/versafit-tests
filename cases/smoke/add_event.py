@@ -3,50 +3,40 @@ import os, sys
 
 class Add_Event(TestCase):
 	
-	# @url('/')
-	# def club_login(self):
-		
-	# 	self.e('.login a:nth-of-type(2)').click()
-	# 	self.e_wait('[name="email"]')
-		
-	# 	self.e('[name="email"]').send_keys('kris.versatest@mail.bg')
-	# 	self.e('[name="password"]').send_keys('KrisVersa')
-	# 	self.e('[type="submit"]').click()
-		
-	# 	self.e_wait('.logged-user  a')
-		
-	# 	LOGIN_COOKIES.append(self.browser.get_cookie('fwsess'))
-	# 	self.login_cookie_del()
-	
 	@logged_in('club')
-	@url('/en/club/manage/')
+	@url('/en/club/manage/calendar')
 	def test_add_event(self):
 		
-		self.e('.sub-nav li:nth-of-type(1) a').click()
-		self.e_wait('.fc-left')
+		self.e_wait('.fc-left')											# add event
 		
-		self.e('.fc-left button').click()
+		self.e('.fc-add-button').click()								# add event
 		sleep(1)
 		
 		self.e('#title').send_keys("HeavyWeight Beer Cup")
 		self.e('#event_sports [value="12"]').click()
 		self.e('[name="slots"]').send_keys('10')
 		self.e('.filed-wrapper-col #dp-start').click()
-		self.e('.ui-datepicker-buttonpane button').click()
+		self.e('.ui-datepicker-buttonpane button').click()				# now button
 		self.e('.ui_tpicker_hour').click()
 		self.e('[value="23"]').click()
 		self.e('.ui_tpicker_minute_slider').click()
 		self.e('.ui_tpicker_minute_slider [value="0"]').click()
-		self.e('[data-handler="hide"]').click()
-		# self.e('.filed-wrapper-col #dp-end').click()
-		# self.e('.ui-datepicker-calendar tr:nth-of-type(5) td').click()
+		self.e('[data-handler="hide"]').click()							# done button
 		self.e('#locality').send_keys('stockholm')
+		
+		displayed(self, 		'[name="repeat"]')
+		instance(self, 			'[value="weekly"]')
+		instance(self, 			'[name="repeat_count"]')
+		instance(self, 			'[name="repeat_count"] [value="1"]')
+		instance(self, 			'[name="repeat_count"] [value="18"]')
+		
 		# self.e('[name="repeat"]').click()
 		# self.e('[value="weekly"]').click()
 		# sleep(1)
 		# self.e('[name="repeat_count"]').click()
 		# self.e('[value="6"]').click()
-		self.e('[value="Create Event"]').click()
+		
+		self.e('[value="Create Event"]').submit()
 		
 		sleep(3)
 		
@@ -54,8 +44,6 @@ class Add_Event(TestCase):
 	
 	@logged_in('club')
 	def delete_event(self):
-		
-		self.e_wait('.fc-view-container')
 		
 		self.e('[data-full="11:00 PM - 12:00 AM"]').click()
 		sleep(1)

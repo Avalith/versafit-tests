@@ -105,11 +105,22 @@ class Logins:
 		
 		cls.e('input[name=email]').send_keys(opts['user'])
 		cls.e('input[name=password]').send_keys(opts['pass'])
-		cls.e('input[type=submit]').click()
+		cls.e('input[type=submit]').submit()
 		
 		cls.e_wait('.logged-username')
 		
-	# fb
+	@classmethod
+	def login_method_facebook(cls, opts):
+		cls.go('/en/login/')
+		
+		cls.e('.alternative-login a:nth-of-type(1)').click()
+		sleep(1)
+		
+		cls.e('#email').send_keys(opts['user'])
+		cls.e('#pass').send_keys(opts['pass'])
+		cls.e('[type="submit"]').submit()
+		
+		cls.e_wait('.logged-username')
 	
 	@classmethod
 	def login_method_twitter(cls, opts):
@@ -121,7 +132,7 @@ class Logins:
 		
 		cls.e('#username_or_email').send_keys(opts['user'])
 		cls.e('#password').send_keys(opts['pass'])
-		cls.e('.submit').click()
+		cls.e('.submit').submit()
 		
 		cls.e_wait('.logged-username')
 	
