@@ -34,6 +34,7 @@ class Edit_Profile(TestCase):
 		displayed(self, '[name="social_media[google_plus][url]"]')
 		displayed(self, '[name="social_media[instagram][url]"]')
 		displayed(self, '.links a:nth-of-type(3)')
+		
 		self.e('[value="Save"]').submit()
 		
 		sleep(3)

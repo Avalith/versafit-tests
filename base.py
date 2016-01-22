@@ -186,7 +186,9 @@ class Browser(webdriver.Chrome):
 	def accept_alert(self):
 		alert = self.switch_to_alert()
 		alert.accept()
-
+		
+	def screen(self, folder):
+		return self.get_screenshot_as_file(folder)
 
 def run(*tests):
 	import cases
@@ -234,6 +236,7 @@ class TestCase(unittest.TestCase, Logins):
 		cls.hover			= cls.browser.hover
 		cls.double_click	= cls.browser.double_click
 		cls.accept_alert	= cls.browser.accept_alert
+		cls.screen 			= cls.browser.screen
 	
 	@classmethod
 	def browser_close(cls):

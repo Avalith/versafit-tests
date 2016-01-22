@@ -16,6 +16,7 @@ class Invite_User(TestCase):
 		self.e_wait('.user-name')
 		
 		self.assertEqual('Kris Versa', self.e('.user-name').text)
+		
 		self.e('[value="Invite"').click()
 		sleep(1)
 		
@@ -32,6 +33,7 @@ class Invite_User(TestCase):
 		self.e_wait('.button-centered-wrapper')								# all friends
 		
 		self.assertEqual('Kris Test', self.e('.friend-name').text)
+		
 		self.e('.button-centered-wrapper').click()							# all friends
 		sleep(1)
 		
