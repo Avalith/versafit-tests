@@ -189,6 +189,9 @@ class Browser(webdriver.Chrome):
 		
 	def screen(self, folder):
 		return self.get_screenshot_as_file(folder)
+		
+	def del_cookie(self, cook):
+		return self.delete_cookie(cook)
 
 def run(*tests):
 	import cases
@@ -237,6 +240,7 @@ class TestCase(unittest.TestCase, Logins):
 		cls.double_click	= cls.browser.double_click
 		cls.accept_alert	= cls.browser.accept_alert
 		cls.screen 			= cls.browser.screen
+		cls.del_cookie 		= cls.browser.del_cookie
 	
 	@classmethod
 	def browser_close(cls):

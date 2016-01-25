@@ -20,11 +20,11 @@ ID_USER					= 65536
 
 LOGIN_DETAILS 			= {
 	'club'			: { 'type': 'standard'		, 'user': 'kris.versatest@mail.bg'		, 'pass': 'KrisVersa', },
-	'user'			: { 'type': 'standard'		, 'user': ''							, 'pass': '', },
+	'user'			: { 'type': 'standard'		, 'user': 'krisemailuser@mail.bg'		, 'pass': 'KrisVersa', },
 	'coach'			: { 'type': 'standard'		, 'user': ''							, 'pass': '', },
 	'supervisor'	: { 'type': 'standard'		, 'user': ''							, 'pass': '', },
 	'facebook'		: { 'type': 'facebook'		, 'user': 'kris.versatest@mail.bg'		, 'pass': 'KrisVersa', },
-	'twitter'		: { 'type': 'twitter'		, 'user': 'kris.yanachkov@gmail.com'	, 'pass': 'bind7ultimate', },
+	'twitter'		: { 'type': 'twitter'		, 'user': 'kris.yanachkov@gmail.com'	, 'pass': 'KrisVersa', },
 	'googleplus'	: { 'type': 'googleplus'	, 'user': ''							, 'pass': '', },
 	'wronguser'		: { 'type': 'standart'		, 'user': 'wronguser'					, 'pass': 'highsecurity', },
 }

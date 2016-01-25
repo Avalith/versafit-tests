@@ -16,7 +16,7 @@ class Edit_Profile(TestCase):
 		self.e('.sport-wrapper-inner a').click()									# remove my sport 2
 		sleep(1)
 		
-		self.e('.icon-close').click()												# remove my subscriptions
+		# self.e('.icon-close').click()												# remove my subscriptions
 		sleep(1)
 		
 		self.e('[name="data[name]"]').send_keys(' Changes')
@@ -70,7 +70,7 @@ class Edit_Profile(TestCase):
 		self.e('.select2:nth-of-type(1) .select2-search__field').click()
 		self.e('#select2-user_sport-results li:nth-of-type(2)').click()					# add calisthenics
 		self.e('.select2:nth-of-type(2) .select2-search__field').click()
-		self.e('#select2-club_subscriptions-results li:nth-of-type(1)').click()			# add club testing
+		# self.e('#select2-club_subscriptions-results li:nth-of-type(1)').click()			# add club testing
 		self.e('[value="Save"]').submit()
 		
 		sleep(3)

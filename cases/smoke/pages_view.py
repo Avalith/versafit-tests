@@ -95,7 +95,7 @@ class Pages_View(TestCase):
 		displayed(self, 																'.user-image-wrapper img')
 		displayed(self, 																'[value="Invite"]')
 		displayed(self, 																'.user-info p a')													# social links
-		displayed(self, 																'.user-sports a')
+		displayed(self, 																'.carousel a')
 		displayed(self, 																'.Xtd-inner')														# user activity 
 		displayed(self, 																'.friends-list h5')													# friends number
 		displayed(self, 																'.friends-list a')
