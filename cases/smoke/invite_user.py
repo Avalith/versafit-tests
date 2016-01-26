@@ -20,6 +20,8 @@ class Invite_User(TestCase):
 		self.e('[value="Invite"').click()
 		sleep(1)
 		
+		self.del_cookie('fwsess')
+		
 		self.accept_delete_invite()
 		
 	@logged_in('facebook')

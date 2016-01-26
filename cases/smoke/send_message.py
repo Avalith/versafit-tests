@@ -6,7 +6,7 @@ class Send_Message(TestCase):
 	@logged_in('user')
 	@url('/en/profile/krisemailuser/friend_list/')
 	def test_send_message(self):
-		global time
+		global time_send
 		
 		self.e('.friend-actions a:nth-of-type(2)').click()
 		self.e_wait('.send-message h5')
@@ -15,15 +15,15 @@ class Send_Message(TestCase):
 		self.e('[value="Send"]').submit()
 		sleep(2)
 		
-		time = self.e('.previews-message .meta').text
+		time_send = self.e('.previews-message .meta').text
 		
-		# self.del_cookie('fwsess')
+		self.del_cookie('fwsess')
 		
-		# self.view_message()
+		self.view_message()
 		
 	@logged_in('twitter')
 	@url('/en/profile/kris-test/messages')
-	def test_z_view_message(self):
+	def view_message(self):
 		
 		self.assertEqual('1', self.e('.messages .counter').text)
 		self.assertEqual('krisemailuser', self.e('.main-cnt-col-left .message-copy h4').text)
@@ -31,5 +31,5 @@ class Send_Message(TestCase):
 		self.e('.main-cnt-col-left .message-copy').click()
 		self.e_wait('[name="text"]')
 		
-		self.assertTrue(time == self.e('.previews-message .meta').text)
+		self.assertTrue(time_send == self.e('.previews-message .meta').text)
 		self.assertEqual('Test MEssage! 1234567890-_=+[]{}|;:~`<>,./?', self.e('.previews-message-copy').text)
