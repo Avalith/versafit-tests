@@ -29,9 +29,9 @@ class Club_Manage(TestCase):
 	def test_employees_view(self):
 		
 		self.e('.sub-nav li:nth-of-type(2)').click()								# employees
-		self.e_wait('.sub-nav-title a')												# go to club view
+		sleep(1)
 		
-		self.e('[type="search"]').send_keys('Asen Lazarov')
+		self.e('.sidebar-col-right [type="search"]').send_keys('Asen Lazarov')
 		sleep(1)
 		
 		self.e('.select2-results li').click()
@@ -46,7 +46,7 @@ class Club_Manage(TestCase):
 		instance(self, 																'[value="coach"]')
 		instance(self, 																'[value="supervisor"]')
 		instance(self, 																'[value="12"]')							# boxing
-		instance(self, 																'[value="21"]')							# calisthenics
+		instance(self, 																'[value="13"]')							# kickboxing
 		
 		displayed(self, 															'[type="submit"]')
 		
@@ -65,24 +65,22 @@ class Club_Manage(TestCase):
 		instance(self, 																'[name="sport_id"] [value="12"]')
 		instance(self, 																'[name="sport_id"] [value="21"]')
 		instance(self, 																'[name="sport_id"] [value="20"]')
-		instance(self, 																'[name="sport_id"] [value="31"]')
 		instance(self, 																'[name="sport_id"] [value="23"]')
 		instance(self, 																'[name="sport_id"] [value="24"]')
 		instance(self, 																'[name="sport_id"] [value="34"]')
 		instance(self, 																'[name="sport_id"] [value="28"]')
 		instance(self, 																'[name="sport_id"] [value="25"]')
 		instance(self, 																'[name="sport_id"] [value="11"]')
-		instance(self, 																'[name="sport_id"] [value="16"]')
 		instance(self, 																'[name="sport_id"] [value="13"]')
 		instance(self, 																'[name="sport_id"] [value="29"]')
 		instance(self, 																'[name="sport_id"] [value="18"]')
 		
 		displayed(self, 															'[name="price"]')
 		
-		instance(self, 																'[name="price"] [value="1"]')
-		instance(self, 																'[name="price"] [value="20"]')
-		instance(self, 																'[name="price"] [value="50"]')
-		instance(self, 																'[name="price"] [value="100"]')
+		instance(self, 																'[value="5"]')
+		instance(self, 																'[min="5"]')
+		instance(self, 																'[step="5"]')
+		instance(self, 																'[aria-valuenow="5"]')
 		
 		displayed(self, 															'#locality')
 		displayed(self, 															'#map')
@@ -106,7 +104,7 @@ class Club_Manage(TestCase):
 		
 		instance(self, 																'#filter_sports [value=""]')
 		instance(self, 																'#filter_sports [value="12"]')
-		instance(self, 																'#filter_sports [value="21"]')
+		instance(self, 																'#filter_sports [value="13"]')
 		
 		displayed(self, 															'#filter_days')
 		

@@ -17,7 +17,7 @@ class Invite_User(TestCase):
 		
 		self.assertEqual('Kris Versa', self.e('.user-name').text)
 		
-		self.e('[value="Invite"').click()
+		self.e('[value="Add friend"').click()
 		sleep(1)
 		
 		self.del_cookie('fwsess')
@@ -27,7 +27,7 @@ class Invite_User(TestCase):
 	@logged_in('facebook')
 	def accept_delete_invite(self):
 		
-		self.e('div:nth-child(5) .icon-whistle').click()
+		self.e('.icon-whistle').click()
 		sleep(1)
 		
 		self.e('.accept').click()
@@ -46,3 +46,4 @@ class Invite_User(TestCase):
 		self.e_wait('.friends-list h5')
 		
 		self.assertEqual('FRIENDS / 0 /', self.e('.friends-list h5').text)
+		

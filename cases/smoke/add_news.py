@@ -19,19 +19,19 @@ class Add_News(TestCase):
 		
 		sleep(1)
 		
-		self.go('/club/kristestclub')
+		self.go('/club/kris-test-club')
 		self.e_wait('.MultiFile-label img')										# club image
 		
-		self.assertEqual('BMW', self.e('.news-item:nth-of-type(2) h2').text)
+		self.assertEqual('BMW', self.e('.news-item:nth-of-type(1) h2').text)
 		self.delete_event()
 		
 	@logged_in('club')
-	@url('/club/manage/news/')
+	@url('/en/club/manage/news/')
 	def delete_event(self):
 		
-		self.assertEqual('BMW', self.e('.news-item:nth-of-type(2) h2').text)
-		self.e('.news-item:nth-of-type(2) a:nth-of-type(2)').click()			# delete news
+		self.assertEqual('BMW', self.e('.news-item:nth-of-type(1) h2').text)
+		self.e('.news-item:nth-of-type(1) a:nth-of-type(2)').click()			# delete news
 		sleep(1)
 		
-		self.assertEqual('BMW M', self.e('.news-item h2').text)
+		self.assertEqual('TEST NEWS', self.e('.news-item h2').text)
 		

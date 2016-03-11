@@ -36,7 +36,7 @@ class Add_Event(TestCase):
 		# self.e('[name="repeat_count"]').click()
 		# self.e('[value="6"]').click()
 		
-		self.e('[value="Create Event"]').submit()
+		self.e('.button.create-event').submit()
 		
 		sleep(3)
 		
@@ -55,9 +55,9 @@ class Add_Event(TestCase):
 		sleep(2)
 		
 		self.go('/')
-		self.e_wait('.upcoming-event tr')
+		# self.e_wait('.upcoming-event tr')
 		
-		self.assertFalse('HeavyWeight Beer Cup' == self.e('.upcoming-event:first-of-type tr:nth-child(2) td span').text)
+		# self.assertFalse('HeavyWeight Beer Cup' == self.e('.upcoming-event:first-of-type tr:nth-child(2) td span').text)
 		
 		
 		
