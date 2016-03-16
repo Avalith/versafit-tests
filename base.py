@@ -64,7 +64,6 @@ def logged_in(login_type):
 	def wrapper(fn):
 		def wrapped(*args, **kwargs):
 			opts = LOGIN_DETAILS[login_type]
-			
 			cls = args[0]
 			cls.login_cookie_set(login_type, opts)
 			
@@ -83,21 +82,20 @@ class Logins:
 	
 	@classmethod
 	def login_cookie_set(cls, login_type, opts):
-		cookie = LOGIN_COOKIES.get(login_type)
-		
+		cookie = LOGIN_COOKIES.get(login_type, None)
 		if cookie:
 			cls.login_cookie_del()
 			cls.browser.add_cookie(cookie)
+			sleep(.5)
 		else:
 			getattr(cls, 'login_method_' + opts['type'])(opts)
-			
 			LOGIN_COOKIES[login_type] = cls.browser.get_cookie('fwsess')
-			
 			sleep(.5)
 	
 	@classmethod
 	def login_cookie_del(cls):
 		cls.browser.delete_cookie('fwsess')
+		# cls.browser.delete_all_cookies()
 	
 	@classmethod
 	def login_method_standard(cls, opts):
