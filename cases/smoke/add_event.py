@@ -1,5 +1,6 @@
 from base import *
 import os, sys
+import logging
 
 class Add_Event(TestCase):
 	
@@ -44,6 +45,11 @@ class Add_Event(TestCase):
 	
 	@logged_in('club')
 	def delete_event(self):
+		# sleep(1)
+		cookie_alert = self.e('.cc_btn')
+		
+		if cookie_alert:
+			self.e('.cc_btn').click()
 		
 		self.e('[data-full="11:00 PM - 12:00 AM"]').click()
 		sleep(1)

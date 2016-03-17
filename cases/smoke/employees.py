@@ -1,11 +1,13 @@
 from base import *
 import os, sys
+import logging
 
 class Employees(TestCase):
 	
 	@logged_in('club')
 	@url('/en/club/manage/employees/')
 	def test_add_employee(self):
+		
 		self.e('.sidebar-col-right [type="search"]').send_keys('kris versa')
 		sleep(1)
 		
@@ -67,6 +69,7 @@ class Employees(TestCase):
 		sleep(1)
 		
 		self.accept_alert()
+		sleep(1)
 		
 		
 		

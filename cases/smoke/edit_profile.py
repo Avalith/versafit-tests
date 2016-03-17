@@ -2,6 +2,7 @@
 
 from base import *
 import os, sys
+import logging
 
 class Edit_Profile(TestCase):
 	
@@ -45,11 +46,9 @@ class Edit_Profile(TestCase):
 		self.edit_clear()
 		
 	@logged_in('twitter')
-	@url('/en/')
+	@url('/en/profile/kris-test/')
 	def edit_clear(self):
 		
-		self.e_wait('.logged-user-img')
-		self.e('.profile-subnav-wrapper a').click()
 		self.e_wait('.user-image-wrapper img')
 		
 		self.e('.user-actions a').click()
@@ -71,12 +70,13 @@ class Edit_Profile(TestCase):
 		self.e('[value="2016"]').click()
 		self.e('#months [value="12"]').click()
 		self.e('#days [value="31"]').click()
+		
 		self.e('.profile-img .select2:nth-of-type(1) .select2-search__field').click()
-		self.e('#select2-user_sport-results li:nth-of-type(2)').click()					# add boxing
+		self.e('.select2-results__options li:nth-of-type(2)').click()					# add boxing
 		self.e('.profile-img .select2:nth-of-type(1) .select2-search__field').click()
-		self.e('#select2-user_sport-results li:nth-of-type(10)').click()				# add calisthenics
+		self.e('.select2-results__options li:nth-of-type(10)').click()					# add calisthenics
 		self.e('.profile-img .select2:nth-of-type(2) .select2-search__field').click()
-		self.e('#select2-club_subscriptions-results li:nth-of-type(4)').click()			# add Kris Test Club
+		self.e('.select2-results__options li:nth-of-type(4)').click()					# add Kris Test Club
 		self.e('[value="Save"]').submit()
 		
 		sleep(3)

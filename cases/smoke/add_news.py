@@ -1,5 +1,6 @@
 from base import *
 import os, sys
+import logging
 
 class Add_News(TestCase):
 	

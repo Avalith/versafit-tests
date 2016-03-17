@@ -8,8 +8,6 @@ class Pages_View(TestCase):
 	@url('/')
 	def test_homepage(self):
 		
-		# self.e_wait('.what-is-versafit')
-		
 		self.assertEqual('http://versafit.test.avalith.bg/en/', 									self.e('.header-logo a').get_attribute('href'))
 		
 		displayed(self, 																			'.icon-whistle')
@@ -102,7 +100,7 @@ class Pages_View(TestCase):
 		self.e('.search-menu a').click()
 		self.e('.select2-selection').click()
 		self.e('.select2-search__field').send_keys('Kris Versa')
-		sleep(1)
+		sleep(2)
 		
 		self.e('.select2-results__option img').click()
 		self.e_wait('.user-name')

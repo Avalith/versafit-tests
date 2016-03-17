@@ -1,5 +1,6 @@
 from base import *
 import os, sys
+import logging
 
 class Club_Manage(TestCase):
 	
@@ -44,7 +45,7 @@ class Club_Manage(TestCase):
 		displayed(self, 															'.select-style [name="sport_id"]')
 		
 		instance(self, 																'[value="coach"]')
-		instance(self, 																'[value="supervisor"]')
+		# instance(self, 																'[value="supervisor"]')
 		instance(self, 																'[value="12"]')							# boxing
 		instance(self, 																'[value="13"]')							# kickboxing
 		

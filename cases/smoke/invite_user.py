@@ -1,5 +1,6 @@
 from base import *
 import os, sys
+import logging
 
 class Invite_User(TestCase):
 	
@@ -25,6 +26,7 @@ class Invite_User(TestCase):
 		self.accept_delete_invite()
 		
 	@logged_in('facebook')
+	@url('/')
 	def accept_delete_invite(self):
 		
 		self.e('.icon-whistle').click()

@@ -1,11 +1,13 @@
 from base import *
 import os, sys
+import logging
 
 class Send_Message(TestCase):
 	
 	@logged_in('user')
 	@url('/en/profile/kris-user/friend_list/')
 	def test_send_message(self):
+		
 		global time_send
 		
 		self.e('.friend-actions a:nth-of-type(2)').click()
