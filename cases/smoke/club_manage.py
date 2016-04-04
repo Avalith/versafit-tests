@@ -5,7 +5,7 @@ import logging
 class Club_Manage(TestCase):
 	
 	@logged_in('club') 
-	@url('/en/club/manage/')
+	# @url('/en/club/manage/')
 	def test_calendar_view(self):
 		
 		self.e('.sub-nav li:nth-of-type(1)').click()								# calendar
@@ -26,7 +26,7 @@ class Club_Manage(TestCase):
 		displayed(self, 															'.fc-agendaWeek-button')
 		
 	@logged_in('club')
-	@url('/en/club/manage/')
+	# @url('/en/club/manage/')
 	def test_employees_view(self):
 		
 		self.e('.sub-nav li:nth-of-type(2)').click()								# employees
@@ -52,7 +52,7 @@ class Club_Manage(TestCase):
 		displayed(self, 															'[type="submit"]')
 		
 	@logged_in('club')
-	@url('/en/club/manage/')
+	# @url('/en/club/manage/')
 	def test_applications_view(self):
 		
 		self.e('.sub-nav li:nth-of-type(3)').click()								# applications
@@ -95,11 +95,11 @@ class Club_Manage(TestCase):
 		displayed(self, 															'.MultiFile-remove')
 		
 	@logged_in('club')
-	@url('/en/club/manage/')
+	# @url('/en/club/manage/')
 	def test_history_view(self):
 		
-		self.e('.sub-nav li:nth-of-type(4)').click()								# history
-		self.e_wait('.upcoming-event')												# review event
+		self.e('.sub-nav li:nth-of-type(4)').click()																		# history
+		self.e_wait('.upcoming-event')																						# review event
 		
 		displayed(self, 															'#filter_sports')
 		

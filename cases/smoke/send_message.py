@@ -34,4 +34,4 @@ class Send_Message(TestCase):
 		self.e_wait('[name="text"]')
 		
 		self.assertTrue(time_send == self.e('.previews-message .meta').text)
-		self.assertEqual('Test MEssage! 1234567890-_=+[]{}|;:~`<>,./?', self.e('.previews-message-copy').text)
+		self.assertEqual('Test MEssage! 1234567890-_=+[]{}|;:~`,./?', self.e('.previews-message-copy').text)

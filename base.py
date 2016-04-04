@@ -118,10 +118,10 @@ class Logins:
 		cls.e('#email').send_keys(opts['user'])
 		cls.e('#pass').send_keys(opts['pass'])
 		cls.e('#loginbutton').submit()
-		sleep(1)
+		# sleep(1)
 		
-		cls.e('#pass').send_keys(opts['pass'])
-		cls.e('#loginbutton').submit()
+		# cls.e('#pass').send_keys(opts['pass'])
+		# cls.e('#loginbutton').submit()
 		
 		cls.e_wait('.logged-username')
 	

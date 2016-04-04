@@ -24,6 +24,8 @@ class Edit_Profile(TestCase):
 		
 		self.e('[name="data[name][first_name]"]').send_keys('Changes')
 		self.e('[name="data[name][last_name]"]').send_keys('Changes')
+		# self.e('[name="data[phone_number]"]').clear()
+		# self.e('[name="data[phone_number]"]').send_keys('+35969')
 		self.e('[value="BG"]').click()
 		self.e('[name="data[city]"]').clear()
 		self.e('[name="data[city]"]').send_keys('Sofia')
@@ -60,6 +62,8 @@ class Edit_Profile(TestCase):
 		self.e('[name="data[name][first_name]"]').send_keys('Kris')
 		self.e('[name="data[name][last_name]"]').clear()
 		self.e('[name="data[name][last_name]"]').send_keys('Test')
+		# self.e('[name="data[phone_number]"]').clear()
+		# self.e('[name="data[phone_number]"]').send_keys('+35988')
 		self.e('[value="SWE"]').click()
 		self.e('[name="data[city]"]').clear()
 		self.e('[name="data[city]"]').send_keys(u'Jukkasjärvi')
@@ -74,7 +78,7 @@ class Edit_Profile(TestCase):
 		self.e('.profile-img .select2:nth-of-type(1) .select2-search__field').click()
 		self.e('.select2-results__options li:nth-of-type(2)').click()					# add boxing
 		self.e('.profile-img .select2:nth-of-type(1) .select2-search__field').click()
-		self.e('.select2-results__options li:nth-of-type(10)').click()					# add calisthenics
+		self.e('.select2-results__options li:nth-of-type(10)').click()					# add kickboxing
 		self.e('.profile-img .select2:nth-of-type(2) .select2-search__field').click()
 		self.e('.select2-results__options li:nth-of-type(4)').click()					# add Kris Test Club
 		self.e('[value="Save"]').submit()

@@ -60,7 +60,7 @@ class Add_Event(TestCase):
 		self.accept_alert()
 		sleep(2)
 		
-		self.go('/')
+		# self.go('/')
 		# self.e_wait('.upcoming-event tr')
 		
 		# self.assertFalse('HeavyWeight Beer Cup' == self.e('.upcoming-event:first-of-type tr:nth-child(2) td span').text)
