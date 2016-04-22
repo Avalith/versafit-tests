@@ -32,14 +32,14 @@ class Club_Manage(TestCase):
 		self.e('.sub-nav li:nth-of-type(2)').click()								# employees
 		sleep(1)
 		
-		self.e('.sidebar-col-right [type="search"]').send_keys('Asen Lazarov')
+		self.e('.sidebar-col-right [type="search"]').send_keys('KRIS EMAIL')
 		sleep(1)
 		
 		self.e('.select2-results li').click()
 		
 		displayed(self, 															'.list-item img')
 		
-		self.assertEqual('ASEN LAZAROV',											 self.e('.list-item h5').text)
+		self.assertEqual('KRIS EMAIL', self.e('.list-item h5').text)
 		
 		displayed(self, 															'[name="role"]')
 		displayed(self, 															'.select-style [name="sport_id"]')
@@ -47,7 +47,7 @@ class Club_Manage(TestCase):
 		instance(self, 																'[value="coach"]')
 		# instance(self, 																'[value="supervisor"]')
 		instance(self, 																'[value="12"]')							# boxing
-		instance(self, 																'[value="13"]')							# kickboxing
+		# instance(self, 																'[value="13"]')							# kickboxing
 		
 		displayed(self, 															'[type="submit"]')
 		
@@ -64,17 +64,17 @@ class Club_Manage(TestCase):
 		displayed(self, 															'.select-style [name="sport_id"]')
 		
 		instance(self, 																'[name="sport_id"] [value="12"]')
-		instance(self, 																'[name="sport_id"] [value="21"]')
-		instance(self, 																'[name="sport_id"] [value="20"]')
+		# instance(self, 																'[name="sport_id"] [value="21"]')
+		# instance(self, 																'[name="sport_id"] [value="20"]')
 		instance(self, 																'[name="sport_id"] [value="23"]')
-		instance(self, 																'[name="sport_id"] [value="24"]')
+		# instance(self, 																'[name="sport_id"] [value="24"]')
 		instance(self, 																'[name="sport_id"] [value="34"]')
-		instance(self, 																'[name="sport_id"] [value="28"]')
-		instance(self, 																'[name="sport_id"] [value="25"]')
+		# instance(self, 																'[name="sport_id"] [value="28"]')
+		# instance(self, 																'[name="sport_id"] [value="25"]')
 		instance(self, 																'[name="sport_id"] [value="11"]')
-		instance(self, 																'[name="sport_id"] [value="13"]')
-		instance(self, 																'[name="sport_id"] [value="29"]')
-		instance(self, 																'[name="sport_id"] [value="18"]')
+		# instance(self, 																'[name="sport_id"] [value="13"]')
+		# instance(self, 																'[name="sport_id"] [value="29"]')
+		# instance(self, 																'[name="sport_id"] [value="18"]')
 		
 		displayed(self, 															'[name="price"]')
 		
@@ -105,7 +105,7 @@ class Club_Manage(TestCase):
 		
 		instance(self, 																'#filter_sports [value=""]')
 		instance(self, 																'#filter_sports [value="12"]')
-		instance(self, 																'#filter_sports [value="13"]')
+		# instance(self, 																'#filter_sports [value="13"]')
 		
 		displayed(self, 															'#filter_days')
 		

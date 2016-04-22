@@ -31,7 +31,7 @@ class Edit_Profile(TestCase):
 		self.e('[name="data[city]"]').send_keys('Sofia')
 		self.e('[name="data[address]"]').send_keys('`,./<>?;:|[]{}!@#$%^&*()-_+=')
 		# self.e('[name="data[postcode]"]').send_keys('123')
-		self.e('[value="1901"]').click()
+		self.e('[value="1931"]').click()
 		self.e('#months [value="01"]').click()
 		self.e('#days [value="01"]').click()
 		
@@ -71,14 +71,14 @@ class Edit_Profile(TestCase):
 		self.e('[name="data[address]"]').send_keys('IceHotel')
 		# self.e('[name="data[postcode]"]').clear()
 		# self.e('[name="data[postcode]"]').send_keys('98191')
-		self.e('[value="2016"]').click()
+		self.e('[value="2000"]').click()
 		self.e('#months [value="12"]').click()
 		self.e('#days [value="31"]').click()
 		
 		self.e('.profile-img .select2:nth-of-type(1) .select2-search__field').click()
-		self.e('.select2-results__options li:nth-of-type(2)').click()					# add boxing
+		self.e('.select2-results__options li:nth-of-type(1)').click()					# add boxing
 		self.e('.profile-img .select2:nth-of-type(1) .select2-search__field').click()
-		self.e('.select2-results__options li:nth-of-type(10)').click()					# add kickboxing
+		self.e('.select2-results__options li:nth-of-type(4)').click()					# add grappling
 		self.e('.profile-img .select2:nth-of-type(2) .select2-search__field').click()
 		self.e('.select2-results__options li:nth-of-type(4)').click()					# add Kris Test Club
 		self.e('[value="Save"]').submit()

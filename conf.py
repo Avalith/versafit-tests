@@ -16,7 +16,7 @@ URL_BASE 				= 'http://versafit.test.avalith.bg'
 
 LOGIN_DETAILS 			= {
 	'club'			: { 'type': 'standard'		, 'user': 'kris.versatest@mail.bg'		, 'pass': 'KrisVersa', },
-	'user'			: { 'type': 'standard'		, 'user': 'krisemailuser@mail.bg'		, 'pass': 'KrisVersa', },
+	'user'			: { 'type': 'standard'		, 'user': 'kris.emailuser@mail.bg'		, 'pass': 'KrisVersa', },
 	'coach'			: { 'type': 'standard'		, 'user': ''							, 'pass': '', },
 	'supervisor'	: { 'type': 'standard'		, 'user': ''							, 'pass': '', },
 	'facebook'		: { 'type': 'facebook'		, 'user': 'kris.versatest@mail.bg'		, 'pass': 'KrisVersa', },

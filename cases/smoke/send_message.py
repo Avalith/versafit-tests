@@ -5,7 +5,7 @@ import logging
 class Send_Message(TestCase):
 	
 	@logged_in('user')
-	@url('/en/profile/kris-user/friend_list/')
+	@url('/en/profile/kris-email/friend_list/')
 	def test_send_message(self):
 		
 		global time_send
@@ -23,12 +23,12 @@ class Send_Message(TestCase):
 		
 		self.view_message()
 		
-	@logged_in('twitter')
-	@url('/en/profile/kris-test/messages')
+	@logged_in('facebook')
+	@url('/en/profile/kris-versa/messages')
 	def view_message(self):
 		
 		self.assertEqual('1', self.e('.messages .counter').text)
-		self.assertEqual('Kris MailUser', self.e('.main-cnt-col-left .message-copy h4').text)
+		self.assertEqual('Kris Email', self.e('.main-cnt-col-left .message-copy h4').text)
 		
 		self.e('.main-cnt-col-left .message-copy').click()
 		self.e_wait('[name="text"]')

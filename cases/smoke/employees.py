@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from base import *
 import os, sys
 import logging
@@ -19,11 +21,11 @@ class Employees(TestCase):
 		sleep(1)
 		
 		displayed(self, '.image img')
-		self.assertEqual('Kris Versa', 	self.e('tr:nth-of-type(2) td:nth-of-type(2) div').text)
-		self.assertEqual('coach', 		self.e('tr:nth-of-type(2) td:nth-of-type(3) div').text)
-		self.assertEqual('Boxing', 		self.e('tr:nth-of-type(2) td:nth-of-type(4) div').text)
-		self.assertEqual('Remove', 		self.e('tr:nth-of-type(2) td:nth-of-type(6) a').text)
-		self.assertEqual('new', 		self.e('tr:nth-of-type(2) .new-status').text)
+		self.assertEqual('Kris Versa', 				self.e('tr:nth-of-type(2) td:nth-of-type(2) div').text)
+		self.assertEqual('coach', 					self.e('tr:nth-of-type(2) td:nth-of-type(3) div').text)
+		self.assertEqual('Submission Grappling', 	self.e('tr:nth-of-type(2) td:nth-of-type(4) div').text)
+		self.assertEqual('Remove', 					self.e('tr:nth-of-type(2) td:nth-of-type(6) a').text)
+		self.assertEqual('new', 					self.e('tr:nth-of-type(2) .new-status').text)
 		
 		self.del_cookie('fwsess')
 		self.accept_request()
@@ -32,7 +34,7 @@ class Employees(TestCase):
 	@url('/')
 	def accept_request(self):
 		
-		self.assertEqual('http://versafit.test.avalith.bg/en/club/kris-test-club/',self.e('.request-pending a').get_attribute('href'))
+		self.assertEqual('http://versafit.test.avalith.bg/se/club/kris-test-club/',self.e('.request-pending a').get_attribute('href'))
 		self.e('.icon-whistle').click()
 		sleep(1)
 		
@@ -41,19 +43,20 @@ class Employees(TestCase):
 		icon = self.e('.icon-whistle')
 		self.hover(icon)
 		self.e('.buttons .accept').click()
-		sleep(1)
+		self.refresh()
+		self.e_wait('.logged-username')
 		
 		helement = self.e('.logged-username')
 		self.hover(helement)
-		self.e('[href="/en/profile/kris-versa/coach/"]').click()
+		self.e('.dropdown-nav a').click()
 		self.e_wait('.container h5')
 		
 		displayed(self, '.datepicker')
-		self.assertEqual('Start Time', 	self.e('.table tr th:nth-of-type(1)').text)
-		self.assertEqual('Event Title', self.e('.table tr th:nth-of-type(2)').text)
-		self.assertEqual('Club', 		self.e('.table tr th:nth-of-type(3)').text)
-		self.assertEqual('Sport', 		self.e('.table tr th:nth-of-type(4)').text)
-		self.assertEqual('Slots', 		self.e('.table tr th:nth-of-type(5)').text)
+		self.assertEqual('Start', 				self.e('.table tr th:nth-of-type(1)').text)
+		self.assertEqual(u'Typ av träningspass', self.e('.table tr th:nth-of-type(2)').text)
+		self.assertEqual('Klubb', 				self.e('.table tr th:nth-of-type(3)').text)
+		self.assertEqual('Sport', 				self.e('.table tr th:nth-of-type(4)').text)
+		self.assertEqual('Platser', 			self.e('.table tr th:nth-of-type(5)').text)
 		
 		self.del_cookie('fwsess')
 		self.delete_coach()

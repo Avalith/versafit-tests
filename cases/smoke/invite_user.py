@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from base import *
 import os, sys
 import logging
@@ -18,7 +20,7 @@ class Invite_User(TestCase):
 		
 		self.assertEqual('Kris Versa', self.e('.user-name').text)
 		
-		self.e('[value="Add friend"').click()
+		self.e('[value="Lägg till vän"').click()
 		sleep(1)
 		
 		self.del_cookie('fwsess')
@@ -47,5 +49,5 @@ class Invite_User(TestCase):
 		self.accept_alert()
 		self.e_wait('.friends-list h5')
 		
-		self.assertEqual('FRIENDS / 0 /', self.e('.friends-list h5').text)
+		self.assertEqual(u'VÄNNER / 1 /', self.e('.friends-list h5').text)
 		
